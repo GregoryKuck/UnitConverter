@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="main" v-cloak class="text-center">
+    <div class="conversionContainer">
+        <div class="unitsContainer">
+            <input type="number" id="conversionValue" v-model="conversion.value" class="form-control top-control" v-on:change="convert"/>
+            <select v-model="conversion.from" class="form-select bottom-control" v-on:change="convert">
+                <option v-for="unit in conversionUnits" :value="unit">{{unit}}</option>
+            </select>
+        </div>
+        <div class="seperator">
+            &nbsp;
+        </div>
+        <div class="unitsContainer">
+            <input type="text" id="conversionValue" v-model="conversionResponse" class="form-control top-control" readonly/>
+            <select v-model="conversion.to" class="form-select bottom-control" v-on:change="convert">
+                <option v-for="unit in conversionUnits" :value="unit">{{unit}}</option>
+            </select>
+        </div>
+    </div>
+    <p class="text-danger">
+        {{conversionError}}
+    </p>
+    </div>
+    <div class="card">
+        <div class="card-body">
+        <h5 class="card-title">Some notes</h5>
+        <p class="card-text">
+            <strong>This solution uses:</strong>
+            <ul>
+                <li>Entity Framework code first - change the UnitConversionDBDatabase connection string value in appsettings.json</li>
+                <li>JQuery</li>
+                <li>VueJS</li>
+                <li>Bootstrap</li>
+            </ul>
+            <br/>
+            <strong>NOTE:</strong>
+            <br/>
+            I have chosen to store the formulae in the database and use the datatable evaluator to parse the formula 
+            (this could be done in many other ways, including creating a more complex data structure that maintains 
+            all the constants and units, etc.).
+            I felt this was the best approach given the time constraints for this exercise. 
+            <br/>
+            A better approach would be to not store any data in the database as these are all constants with known formula.
+            <br />
+            The UI could be cleaned up to separate the types of conversions (temp, length, fluid volume, etc.).
+            <br/>
+            The code first should create the database on first run, but failing which the database should resemble the image below. The DbInitialier.cs class shows how data should be added to the database.
+            <br />
+            <img src="/images/sampledb.png" class="paddedImg"/>
+
+        </p>
+  </div>
+</div>
